@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Print proxy</title>
+    </head>
+    <body>
+        <main>
+            <h1>Print stuff</h1>
+            <form action="/" enctype="multipart/form-data" method="POST">
+                <div class="aligned">
+                    <label for="file">Upload file</label>
+                    <input type="file" name="file" id="file" />
+                </div>
+                <div class="aligned">
+                    <label for="pages">Pages to print</label>
+                    <input
+                        type="text"
+                        name="pages"
+                        id="pages"
+                        value="all"
+                        pattern="all|([0-9]+(-[0-9]+)?(,[0-9]+(-[0-9]+)?)*)"
+                        title="See the help text below"
+                    />
+                </div>
+                <fieldset>
+                    <legend>Orientation</legend>
+                    <input type="radio" name="orientation" id="portrait" checked />
+                    <label for="portrait">Portrait</label>
+                    <input type="radio" name="orientation" id="landscape" value="landscape" />
+                    <label for="landscape">Landscape</label>
+                </fieldset>
+                <fieldset>
+                    <legend>Print on both sides?</legend>
+                    <input type="radio" name="both-sides" id="one-sided" checked value="one-sided" />
+                    <label for="one-sided">Don't</label>
+                    <input type="radio" name="both-sides" id="two-sided-long-edge" value="two-sided-long-edge" />
+                    <label for="two-sided-long-edge">Along long edge</label>
+                    <input type="radio" name="both-sides" id="two-sided-short-edge" value="two-sided-short-edge" />
+                    <label for="two-sided-short-edge">Along short edge</label>
+                </fieldset>
+                <!-- <div class="aligned">
+                    <label for="pages-per-sheet">Pages per sheet</label>
+                    <input
+                        type="text"
+                        name="pages-per-sheet"
+                        id="pages-per-sheet"
+                        value="1"
+                        pattern="1|2|4|6|9|16"
+                        title="See the help text below"
+                        required
+                    />
+                </div> -->
+                <!-- Commented out due to a caveat with `lp` - the page list option when specified along with this option,
+                     stupidly uses the page list option to the output sheet(page) numbers rather than document page numbers. -->
+                <div class="last"><input type="submit" value="Print" /></div>
+            </form>
+        </main>
+        <hr />
+        <aside>
+            <h2>Help</h2>
+            <ul>
+                <li>
+                    <h3>Pages to print</h3>
+                    <p>You can mention page numbers or page ranges, comma separated.</p>
+                    <h4>Examples</h4>
+                    <ul>
+                        <li>1 will print just the first page.</li>
+                        <li>1,4 will print the first and the fourth page.</li>
+                        <li>1-3 will print pages 1 through 3.</li>
+                        <li>1,3-5,7 will print pages 1, 3 through 5 and page 7.</li>
+                    </ul>
+                </li>
+                <li>
+                    <h3>Pages per sheet</h3>
+                    <p>
+                        You can enter 1, 2, 4, 6, 9 or 16 to arrange that many document pages into a grid on one single
+                        sheet of paper e.g for printing powerpoint slides.
+                    </p>
+                </li>
+
+                <li>
+                    <h3>The printer ran out of paper</h3>
+                    <p>
+                        Once you load it with paper, don't press print above again! It will result in two printouts.
+                        Instead, press the OK button on the printer.
+                    </p>
+                </li>
+            </ul>
+        </aside>
+
+        <style>
+            * {
+                font-family: serif;
+            }
+
+            main {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+            }
+
+            form {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            label {
+                text-align: center;
+            }
+
+            .aligned {
+                display: grid;
+                grid-template-rows: 1fr;
+                grid-template-columns: 2fr 3fr;
+                row-gap: 1rem;
+            }
+
+            input[type="radio"] {
+                vertical-align: middle;
+                margin-top: -1px;
+            }
+
+            .last {
+                text-align: center;
+                & input {
+                    font-size: 1.1rem;
+                }
+            }
+
+            ul {
+                margin-left: 0;
+                padding-left: 1rem;
+            }
+        </style>
+    </body>
+</html>
