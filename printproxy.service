@@ -1,0 +1,13 @@
+[Unit]
+Description=a small go server that makes the printer available via HTTP to LAN to avoid driver mess
+
+[Service]
+Type=simple
+WorkingDirectory=/home/sandy/printproxy
+ExecStart=/home/sandy/printproxy/exe
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=printproxy
+
+[Install]
+WantedBy=default.target
