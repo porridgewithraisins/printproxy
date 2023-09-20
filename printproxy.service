@@ -3,8 +3,8 @@ Description=a small go server that makes the printer available via HTTP to LAN t
 
 [Service]
 Type=simple
-WorkingDirectory=/home/sandy/printproxy
-ExecStart=/home/sandy/printproxy/exe
+WorkingDirectory=%h/printproxy
+ExecStart=%h/printproxy/exe
 StandardOutput=journal
 StandardError=journal
 SyslogIdentifier=printproxy
